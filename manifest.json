@@ -1,0 +1,17 @@
+{
+    "id": "PHcAjA5XO3k",
+    "manifest_version": 1,
+    "name": "ony",
+    "description": "Reduce document rot by adding in Who, When, Why a document was created.",
+    "version_name": "0.1.0",
+    "version_number": 110,
+    "sizing_mode": "fill_container",
+    "initial_height": 100,
+    "initial_width": -1,
+    "toolbar_color": "green",
+    "toolbar_icon": "assets/icons/docrot.svg",
+    "thumbnail": "assets/icons/docrot.svg",
+    "js_files": ["app/app.js"],
+    "css_files": ["app/styles.css"],
+    "disable_app_level_comments": false
+}

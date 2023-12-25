@@ -1,0 +1,10 @@
+{
+    "name": "ony",
+    "version": "0.1.0",
+    "description": "Reduce document rot by adding in Who, When, Why a document was created.",
+    "license": "MIT",
+    "author": "Kevin Hill",
+    "scripts": {
+        "publish":"quip-cli bump && quip-cli publish"
+    }
+}
