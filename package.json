@@ -8,7 +8,7 @@
     "scripts": {
         "clean": "rm -rf dist/",
         "build": "npm run clean && rollup -c",
-        "start": "http-server ./dist -p 8080",
+        "start": "http-server ./app -p 8888 --ssl --cert cert.pem --key key.pem",
         "dev": "npm run build && npm run start",
         "watch": "rollup -c -w",
         "prepublish": "npm run build",
