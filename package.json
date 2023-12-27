@@ -4,7 +4,23 @@
     "description": "Reduce document rot by adding in Who, When, Why a document was created.",
     "license": "MIT",
     "author": "Kevin Hill",
+    "type": "module",
     "scripts": {
-        "publish":"quip-cli bump && quip-cli publish"
+        "clean": "rm -rf dist/",
+        "build": "npm run clean && rollup -c",
+        "start": "http-server ./dist -p 8080",
+        "dev": "npm run build && npm run start",
+        "watch": "rollup -c -w",
+        "prepublish": "npm run build",
+        "publish": "quip-cli bump && quip-cli publish"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.23.6",
+        "@babel/preset-env": "^7.23.6",
+        "@rollup/plugin-babel": "^6.0.4",
+        "@rollup/plugin-node-resolve": "^15.2.3",
+        "http-server": "^14.1.1",
+        "rollup-plugin-copy": "^3.5.0",
+        "rollup-plugin-css-only": "^4.5.2"
     }
 }

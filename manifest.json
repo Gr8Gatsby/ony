@@ -11,7 +11,7 @@
     "toolbar_color": "green",
     "toolbar_icon": "assets/icons/docrot.svg",
     "thumbnail": "assets/icons/docrot.svg",
-    "js_files": ["app/app.js"],
-    "css_files": ["app/styles.css"],
+    "js_files": ["dist/app.js"],
+    "css_files": ["dist/styles.css"],
     "disable_app_level_comments": false
 }
