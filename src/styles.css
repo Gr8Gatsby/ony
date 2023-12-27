@@ -1,0 +1,55 @@
+body {
+    background-color: #ffffff; /* Light green background */
+    border: 2px solid #008a00; /* Green border */
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  /* Style for read-only span */
+  #readOnlySpan {
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: bold;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    background-color: transparent;
+    border: none; /* Removes the border */
+    outline: none;
+  }
+  
+  /* Style for inline-input (textarea) */
+  .inline-input {
+    width: 100%; /* Make the textarea take the full width */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    padding: 8px; /* Add some padding */
+    border: 1px solid #1d1d1d; /* A subtle border for the textarea */
+    font-size: 14px; /* Font size for the textarea */
+    line-height: 1.5; /* Line height for the textarea */
+    resize: vertical; /* Allow vertical resizing */
+    background-color: rgb(255, 255, 255); /* Background color when focused */
+    outline: none; /* Remove default outline */
+  }
+  
+  .inline-input:focus {
+    font-weight: bold;
+    background-color: rgb(115, 208, 220);
+    border-bottom: 1px solid black;
+    border: none; /* Ensure no border even in focus */
+  }
+  
+  #instructionPanel {
+    /* Style your instruction panel as needed */
+    /* Other styles */
+    position: relative; /* Set to relative positioning */
+    width: 100%; /* Full width of its container */
+    margin-top: 10px; /* Space above the panel */
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    /* Add more styling as per your app's design */
+  }
