@@ -13,6 +13,8 @@ import {
   toggleEditMode,
 } from "./components/WhyComponent.js";
 
+import { createInstructionPanel } from "./components/Instructions/Instructions.js";
+
 quip.apps.initialize({
   initializationCallback: function (root, params) {
     // Retrieve or initialize authors list
@@ -22,13 +24,8 @@ quip.apps.initialize({
         ? storedAuthors
         : [quip.apps.getViewingUser().getName()];
 
-    // Create the instruction panel
-    var instructionPanel = document.createElement("div");
-    instructionPanel.id = "instructionPanel";
-    instructionPanel.style.display = "none"; // Initially hidden
-    instructionPanel.innerHTML = `<h3>Who, When, Why (ONY)</h3>
-    Double click on the Authors names to edit the author's list. Input must be comma separated names e.g. <strong>Kevin Hill, Ian Varley</strong> <br/> <br/>
-    Double click the <strong>bold</strong> text to edit the Why you created the document <br/>`;
+    // Create and append the instruction panel
+    const instructionPanel = createInstructionPanel();
 
     // Listen for the FOCUS event
     quip.apps.addEventListener(quip.apps.EventType.FOCUS, function () {

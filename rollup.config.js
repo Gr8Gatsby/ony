@@ -20,6 +20,6 @@ export default {
       targets: [
         { src: 'src/styles.css', dest: 'dist' }, // Adjust the path to your CSS file
       ],
-    }),
+    })
   ],
 };

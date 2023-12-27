@@ -53,3 +53,16 @@ body {
     width: 100%;
     /* Add more styling as per your app's design */
   }
+
+  /* Add this CSS to your .css file */
+a {
+  color: #0D69F2; /* Set the text color to blue */
+  text-decoration: none; /* Add an underline to the text */
+  cursor: pointer; /* Change the cursor to a pointer hand */
+}
+
+/* Style when hovering over the link */
+a:hover {
+  color: #0D69F2; /* Change the text color on hover */
+  text-decoration: underline; /* Maintain the underline on hover */
+}
