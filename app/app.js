@@ -178,8 +178,15 @@ function handleInputBlur(inputBox, readOnlySpan) {
   quip.apps.getRootRecord().set("inputValue", value);
   readOnlySpan.textContent = value;
 
-  inputBox.style.display = "none";
-  readOnlySpan.style.display = "inline";
+  if (value.length > 0) {
+    // If value is more than a blank string, hide inputBox and show readOnlySpan
+    inputBox.style.display = "none";
+    readOnlySpan.style.display = "inline";
+  } else {
+    // If value is a blank string, keep inputBox visible and hide readOnlySpan
+    inputBox.style.display = "inline";
+    readOnlySpan.style.display = "none";
+  }
 }
 
 function setupInputEventListeners(inputBox, readOnlySpan) {
