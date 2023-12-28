@@ -34,7 +34,7 @@ body {
   
   .inline-input:focus {
     font-weight: bold;
-    background-color: rgb(115, 208, 220);
+    background-color: #7cacf4;;
     border-bottom: 1px solid black;
     border: none; /* Ensure no border even in focus */
   }
