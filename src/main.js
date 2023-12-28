@@ -13,7 +13,7 @@ import {
   toggleEditMode,
 } from "./components/WhyComponent.js";
 
-import { createInstructionPanel } from "./components/Instructions/Instructions.js";
+import { createInstructionPanel } from "./components/Instructions.js";
 
 quip.apps.initialize({
   initializationCallback: function (root, params) {

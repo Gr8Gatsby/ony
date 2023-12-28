@@ -1,5 +1,5 @@
-import { toggleAuthorsEditMode } from "../AuthorList.js";
-import { toggleEditMode } from "../WhyComponent.js";
+import { toggleAuthorsEditMode } from "./AuthorList.js";
+import { toggleEditMode } from "./WhyComponent.js";
 
 export function createInstructionPanel() {
   var instructionPanel = document.createElement("div");
