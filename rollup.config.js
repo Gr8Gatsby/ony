@@ -1,7 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import babel from '@rollup/plugin-babel';
-import copy from 'rollup-plugin-copy';
+import postcss from 'rollup-plugin-postcss'; // Import the CSS-only plugin
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -16,10 +16,6 @@ export default {
     production && terser(),
     resolve(),
     babel({ babelHelpers: 'bundled', presets: ['@babel/preset-env'] }),
-    copy({
-      targets: [
-        { src: 'src/styles.css', dest: 'dist' }, // Adjust the path to your CSS file
-      ],
-    })
+    postcss({ extract: 'styles.css', minimize: production }), // Minify CSS and output to dist/styles.css
   ],
 };

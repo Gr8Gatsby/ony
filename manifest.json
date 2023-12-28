@@ -3,7 +3,7 @@
     "manifest_version": 1,
     "name": "ony",
     "description": "Reduce document rot by adding in Who, When, Why a document was created.",
-    "version_name": "0.1.0",
+    "version_name": "0.9.0",
     "version_number": 114,
     "sizing_mode": "fill_container",
     "initial_height": 100,

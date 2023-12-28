@@ -1,3 +1,4 @@
+import './styles.css';
 // Main Application File
 import {
   createAuthorsSpan,

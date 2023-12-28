@@ -1,33 +1,38 @@
-// AuthorList.js
+import { createElement } from "../utils/utils.js"; // Replace with the actual path
+
 export function createAuthorsSpan(authors) {
-  var authorsSpan = document.createElement("span");
-  authorsSpan.id = "authorsSpan";
-  authorsSpan.textContent = formatAuthorsList(authors);
+  // Create the authorsSpan element
+  const authorsSpan = createElement("span", {
+    id: "authorsSpan",
+    textContent: formatAuthorsList(authors),
+  });
   return authorsSpan;
 }
 
 export function createAuthorsInput(authors) {
-  var authorsInput = document.createElement("input");
-  authorsInput.type = "text";
-  authorsInput.id = "authorsInput";
-  authorsInput.className = "inline-input";
-  authorsInput.value = authors.join(", ");
-  authorsInput.style.display = "none";
+  // Create the authorsInput element
+  const authorsInput = createElement("input", {
+    type: "text",
+    id: "authorsInput",
+    className: "inline-input",
+    value: authors.join(", "),
+    style: "display: none",
+  });
   return authorsInput;
 }
 
 export function setupAuthorsEventListeners(authorsSpan, authorsInput, authors) {
-  authorsInput.addEventListener("blur", function () {
+  authorsInput.addEventListener("blur", () => {
     handleAuthorsInputBlur(authorsInput, authorsSpan, authors);
   });
 
-  authorsInput.addEventListener("keydown", function (event) {
+  authorsInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       handleAuthorsInputBlur(authorsInput, authorsSpan, authors);
     }
   });
 
-  authorsSpan.addEventListener("dblclick", function () {
+  authorsSpan.addEventListener("dblclick", () => {
     toggleAuthorsEditMode(authorsSpan, authorsInput);
   });
 }
@@ -45,7 +50,7 @@ function formatAuthorsList(authors) {
 }
 
 function handleAuthorsInputBlur(authorsInput, authorsSpan, authors) {
-  var inputAuthors = authorsInput.value.split(",").map(function (author) {
+  const inputAuthors = authorsInput.value.split(",").map((author) => {
     return author.trim();
   });
 

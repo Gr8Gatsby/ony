@@ -1,23 +1,24 @@
-// DateStamp.js
+/**
+ * Creates and returns a span element displaying the document creation date.
+ * If the date is not set, it defaults to the current month and year.
+ * @returns {HTMLElement} The created date span element.
+ */
 export function createDateSpan() {
-    var dateSpan = document.createElement("span");
-    var storedDate = quip.apps.getRootRecord().get("date");
-  
-    if (!storedDate) {
-      storedDate = getCurrentMonthYear();
-      quip.apps.getRootRecord().set("date", storedDate);
-    }
-  
-    dateSpan.textContent = " wrote this document in " + storedDate + ", ";
-    return dateSpan;
-  }
-  
-  export function getCurrentMonthYear() {
-    var now = new Date();
-    var monthNames = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ];
-    return monthNames[now.getMonth()] + " " + now.getFullYear();
-  }
-  
+  const dateSpan = document.createElement("span");
+  const storedDate = quip.apps.getRootRecord().get("date") || getCurrentMonthYear();
+  dateSpan.textContent = ` wrote this document in ${storedDate}, `;
+  return dateSpan;
+}
+
+/**
+ * Gets the current month and year in a formatted string.
+ * @returns {string} The current month and year in the format "Month Year".
+ */
+export function getCurrentMonthYear() {
+  const now = new Date();
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  return `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+}
