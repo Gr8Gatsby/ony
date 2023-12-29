@@ -2,15 +2,15 @@
   background-color: rgba(var(--quipBackground), 0.7);
   color: rgb(var(--quipUiTextPrimary));
 }
+
 body {
   background-color: rgba(var(--quipBackground), 0.7);
   color: rgb(var(--quipUiTextPrimary));
-  border: 2px solid #008a00; /* Green border */
+  border: 2px solid #008a00;
   border-radius: 10px;
   padding: 10px;
 }
 
-/* Style for read-only span */
 #readOnlySpan {
   font-size: inherit;
   font-family: inherit;
@@ -20,66 +20,59 @@ body {
   padding: 0;
   display: inline;
   background-color: transparent;
-  border: none; /* Removes the border */
+  border: none;
   outline: none;
 }
 
-/* Style for inline-input (textarea) */
 .inline-input {
-  width: 100%; /* Make the textarea take the full width */
-  box-sizing: border-box; /* Include padding and border in the width calculation */
-  padding: 8px; /* Add some padding */
-  border: 1px solid #1d1d1d; /* A subtle border for the textarea */
-  font-size: 14px; /* Font size for the textarea */
-  line-height: 1.5; /* Line height for the textarea */
-  resize: vertical; /* Allow vertical resizing */
-  background-color: rgb(255, 255, 255); /* Background color when focused */
-  outline: none; /* Remove default outline */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #1d1d1d;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  background-color: rgb(255, 255, 255);
+  outline: none;
 }
 
 .inline-input:focus {
   font-weight: bold;
   background-color: #7cacf4;
   border-bottom: 1px solid black;
-  border: none; /* Ensure no border even in focus */
+  border: none;
 }
 
 #instructionPanel {
-  position: relative; /* Set to relative positioning */
-  width: 100%; /* Full width of its container */
-  margin-top: 10px; /* Space above the panel */
-  padding: 10px;
+  position: relative;
+  width: 100%;
   margin-top: 10px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 100%;
-  background-color: (var(--quipBackground));
+  background-color: var(--quipBackground);
   color: rgb(var(--quipUiTextPrimary));
 }
 
-/* Add this CSS to your .css file */
 a {
-  color: #0d69f2; /* Set the text color to blue */
-  text-decoration: none; /* Add an underline to the text */
-  cursor: pointer; /* Change the cursor to a pointer hand */
+  color: #0d69f2;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-/* Style when hovering over the link */
 a:hover {
-  color: #0d69f2; /* Change the text color on hover */
-  text-decoration: underline; /* Maintain the underline on hover */
+  color: #0d69f2;
+  text-decoration: underline;
 }
 
 .rounded-profile-picture {
-  border-radius: 50%; /* Makes the image round */
-  width: 16px; /* Set the width as desired */
-  height: 16px; /* Set the height as desired */
-  object-fit: cover; /* Ensures the image is nicely fitted */
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  object-fit: cover;
 }
 
-/* styles.css */
-
-/* Style for the main container of authors */
 .authors-span {
   vertical-align: bottom;
   padding-bottom: 0;
@@ -88,17 +81,15 @@ a:hover {
   background-color: rgba(var(--quipBackground), 0.7);
 }
 
-/* Style for each author component */
 .author-component {
   display: inline-flex;
-  align-items: baseline; /* Aligns the image and text along the baseline */
+  align-items: baseline;
   margin-right: 0px;
 }
 
-/* Style for author images */
 .author-image {
   position: relative;
-  top: 5px; 
+  top: 5px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
