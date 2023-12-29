@@ -1,40 +1,25 @@
 import { toggleAuthorsEditMode } from "./AuthorList.js";
 import { toggleEditMode } from "./WhyComponent.js";
-import { createElement } from "../utils/utils.js"; // Replace with the actual path
+import { createElement } from "../utils/utils.js";
 
 export function createInstructionPanel() {
-  // Create the instructionPanel element
   const instructionPanel = createElement("div", {
     id: "instructionPanel",
-    style: "display: none", // Initially hidden
+    style: "display: none",
   });
 
-  // Create and configure the "Edit authors" link
-  const editAuthorsLink = createElement("a", {
-    textContent: "Edit authors",
-    onclick: toggleAuthorsEditMode,
-  });
+  const createLink = (textContent, onclick) =>
+    createElement("a", { textContent, onclick });
 
-  // Create and configure the authorListInfo element
-  const authorListInfo = createElement("span", {
-    textContent: " - specify the list of author names separated by commas",
-  });
+  const createSpan = (textContent) =>
+    createElement("span", { textContent });
 
-  // Create a new line element (<br>)
+  const editAuthorsLink = createLink("Edit authors", toggleAuthorsEditMode);
+  const authorListInfo = createSpan(" - specify the list of author names separated by commas");
   const newLine = createElement("br");
+  const editWhyLink = createLink("Edit why", toggleEditMode);
+  const whyInfo = createSpan(" - type in why you wrote this document");
 
-  // Create and configure the "Edit why" link
-  const editWhyLink = createElement("a", {
-    textContent: "Edit why",
-    onclick: toggleEditMode,
-  });
-
-  // Create and configure the whyInfo element
-  const whyInfo = createElement("span", {
-    textContent: " - type in why you wrote this document",
-  });
-
-  // Append elements to the instructionPanel
   [editAuthorsLink, authorListInfo, newLine, editWhyLink, whyInfo].forEach(
     (element) => {
       instructionPanel.appendChild(element);
