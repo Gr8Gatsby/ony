@@ -5,7 +5,7 @@ import {
   setupAuthorsEventListeners,
   toggleAuthorsEditMode,
 } from "./components/AuthorList.js";
-import { createDateSpan } from "./components/DateStamp.js";
+import { createDateStampElement, toggleDateEditMode } from "./components/DateStamp.js"; // Update the import
 import {
   createInputElements,
   initializeValues,
@@ -32,7 +32,11 @@ quip.apps.initialize({
 
     initializeValues(readOnlySpan, inputBox);
 
-    [authorsSpan, authorsInput, createDateSpan(), readOnlySpan, inputBox, instructionPanel].forEach(elem => root.appendChild(elem));
+    // Create the DateStamp element
+    const dateStampElement = createDateStampElement();
+
+    // Append all elements to the root
+    [authorsSpan, authorsInput, dateStampElement, readOnlySpan, inputBox, instructionPanel].forEach(elem => root.appendChild(elem));
 
     registerMenuCommand();
     setupInputEventListeners(inputBox, readOnlySpan);
@@ -47,7 +51,7 @@ function registerMenuCommand() {
     menuCommands: [
       {
         id: "toggleEdit",
-        label: "Change Why",
+        label: "Edit Why",
         handler: toggleEditMode,
       },
       {
@@ -55,8 +59,13 @@ function registerMenuCommand() {
         label: "Edit Authors",
         handler: toggleAuthorsEditMode,
       },
+      {
+        id: "toggleEditDate",
+        label: "Edit Date",
+        handler: toggleDateEditMode,
+      },
     ],
-    toolbarCommandIds: ["toggleAuthorEdit", "toggleEdit"],
+    toolbarCommandIds: ["toggleAuthorEdit", "toggleEditDate", "toggleEdit"],
     highlightedCommandIds: ["toggleEdit"],
   });
 }
