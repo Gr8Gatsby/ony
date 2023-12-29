@@ -38,6 +38,27 @@ quip.apps.initialize({
       instructionPanel.style.display = "none"; // Hide instruction panel
     });
 
+    // Add an event listener for DOCUMENT_THEME_UPDATE event
+    quip.apps.addEventListener(quip.apps.EventType.DOCUMENT_THEME_UPDATE, function (event) {
+      // Handle DOCUMENT_THEME_UPDATE event here
+      console.log("DOCUMENT_THEME_UPDATE event received", event);
+      // Add your custom code to respond to the event
+    });
+
+    // Add an event listener for DOCUMENT_TEMPLATE_SETTINGS_CHANGED event
+    quip.apps.addEventListener(quip.apps.EventType.DOCUMENT_TEMPLATE_SETTINGS_CHANGED, function (event) {
+      // Handle DOCUMENT_TEMPLATE_SETTINGS_CHANGED event here
+      console.log("DOCUMENT_TEMPLATE_SETTINGS_CHANGED event received", event);
+      // Add your custom code to respond to the event
+    });
+
+    // Add an event listener for DOCUMENT_TEMPLATE_SETTINGS_CHANGED event
+    quip.apps.addEventListener(quip.apps.EventType.USER_PREFERENCES_UPDATED, function (event) {
+      // Handle DOCUMENT_TEMPLATE_SETTINGS_CHANGED event here
+      console.log("USER_PREFERENCES_UPDATED event received", event);
+      // Add your custom code to respond to the event
+    });
+
     // Initialize elements
     var { readOnlySpan, inputBox } = createInputElements();
     var authorsSpan = createAuthorsSpan(authors);
@@ -95,17 +116,13 @@ function processDocumentMembers(authors, root) {
   console.log("Members loaded");
   const allMembers = quip.apps.getDocumentMembers();
 
-  allMembers.forEach((member) => {
-    console.log(member.getName());
-    if (authors.includes(member.getName())) {
-      // Create an image element for matched members
-      var img = document.createElement("quip.apps.ui.ProfilePicture");
-      img.setAttribute("user", member.getId()); // User's name as alt text
-      img.setAttribute("size", 16); // A CSS class for styling
-      img.setAttribute("round", true);
+  var authorImages = [];
 
-      // Append the image to the root or a specific container
-      root.appendChild(img);
+  allMembers.forEach((member) => {
+    if (authors.includes(member.getName())) {
+      authorImages.push({url:member.aD[0].url, name:member.getName()});
     }
   });
+
+  quip.apps.getRootRecord().set("authorImages", authorImages);
 }

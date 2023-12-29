@@ -13,5 +13,6 @@
     "thumbnail": "assets/icons/docrot.svg",
     "js_files": ["dist/app.js"],
     "css_files": ["dist/styles.css"],
+    "use_color_theme":true,
     "disable_app_level_comments": false
 }

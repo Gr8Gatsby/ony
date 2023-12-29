@@ -1,12 +1,49 @@
 import { createElement } from "../utils/utils.js"; // Replace with the actual path
 
 export function createAuthorsSpan(authors) {
-  // Create the authorsSpan element
   const authorsSpan = createElement("span", {
     id: "authorsSpan",
-    textContent: formatAuthorsList(authors),
+    className: "authors-span",
   });
+
+  authors.forEach((author, index) => {
+    const authorImage = quip.apps
+      .getRootRecord()
+      .get("authorImages")
+      ?.find((img) => img.name === author);
+    const imageUrl = authorImage ? authorImage.url : null;
+    const authorComponent = createAuthorComponent(author, imageUrl);
+    authorsSpan.appendChild(authorComponent);
+
+    // Add separators
+    if (index < authors.length - 2) {
+      authorsSpan.appendChild(document.createTextNode(", "));
+    } else if (index === authors.length - 2) {
+      authorsSpan.appendChild(
+        document.createTextNode(authors.length > 2 ? ", and " : " and ")
+      );
+    }
+  });
+
   return authorsSpan;
+}
+
+function createAuthorComponent(author, imageUrl) {
+  const authorComponent = document.createElement("span");
+  authorComponent.className = "author-component";
+
+  if (imageUrl != null) {
+    const img = document.createElement("img");
+    img.src = imageUrl || null; // Path to a default image
+    img.alt = `${author}'s profile photo`;
+    img.className = "author-image";
+    authorComponent.appendChild(img);
+  }
+  const nameSpan = document.createElement("span");
+  nameSpan.textContent = author;
+  authorComponent.appendChild(nameSpan);
+
+  return authorComponent;
 }
 
 export function createAuthorsInput(authors) {
@@ -37,28 +74,24 @@ export function setupAuthorsEventListeners(authorsSpan, authorsInput, authors) {
   });
 }
 
-function formatAuthorsList(authors) {
-  if (authors.length === 2) {
-    return authors.join(" and ");
-  } else if (authors.length > 2) {
-    return (
-      authors.slice(0, -1).join(", ") + ", and " + authors[authors.length - 1]
-    );
-  } else {
-    return authors.join("");
-  }
-}
-
 function handleAuthorsInputBlur(authorsInput, authorsSpan, authors) {
-  const inputAuthors = authorsInput.value.split(",").map((author) => {
-    return author.trim();
-  });
+  const inputAuthors = authorsInput.value
+    .split(",")
+    .map((author) => author.trim());
 
+  // Update the authors array
   authors.length = 0;
   Array.prototype.push.apply(authors, inputAuthors);
   quip.apps.getRootRecord().set("authors", authors);
 
-  authorsSpan.textContent = formatAuthorsList(authors);
+  // Clear the existing authorsSpan and append the new content
+  while (authorsSpan.firstChild) {
+    authorsSpan.removeChild(authorsSpan.firstChild);
+  }
+  const updatedAuthorsSpan = createAuthorsSpan(authors);
+  authorsSpan.appendChild(updatedAuthorsSpan);
+
+  // Toggle visibility
   authorsInput.style.display = "none";
   authorsSpan.style.display = "inline";
 }
