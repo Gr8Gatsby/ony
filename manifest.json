@@ -1,10 +1,10 @@
 {
-    "id": "PHcAjA5XO3k",
+    "id": "LZLAjAEEfBK",
     "manifest_version": 1,
-    "name": "ony",
+    "name": "Who",
     "description": "Reduce document rot by adding in Who, When, Why a document was created.",
     "version_name": "0.9.0",
-    "version_number": 116,
+    "version_number": 1,
     "sizing_mode": "fill_container",
     "initial_height": 100,
     "initial_width": -1,
