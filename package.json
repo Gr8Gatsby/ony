@@ -1,6 +1,6 @@
 {
     "name": "ony",
-    "version": "0.1.0",
+    "version": "0.9.0",
     "description": "Reduce document rot by adding in Who, When, Why a document was created.",
     "license": "MIT",
     "author": "Kevin Hill",
@@ -10,6 +10,7 @@
         "build": "npm run clean && rollup -c",
         "build:prod": "cross-env NODE_ENV=production rollup -c",
         "start": "http-server . -p 8888 --ssl --cert localhost+2.pem --key localhost+2-key.pem",
+        "start:watch": "concurrently \"npm run watch\" \"npm run start\"",
         "dev": "npm run build && npm run start",
         "watch": "rollup -c -w",
         "prepublish": "npm run build",
@@ -21,6 +22,7 @@
         "@rollup/plugin-babel": "^6.0.4",
         "@rollup/plugin-node-resolve": "^15.2.3",
         "@rollup/plugin-replace": "^5.0.5",
+        "concurrently": "^8.2.2",
         "cross-env": "^7.0.3",
         "http-server": "^14.1.1",
         "rollup": "^2.79.1",
