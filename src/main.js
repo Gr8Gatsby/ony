@@ -70,12 +70,32 @@ function registerMenuCommand() {
   });
 }
 
+function findUrlInMember(member) {
+  // Assuming the URL and width are always within the first element of an array in the member object
+  for (let key in member) {
+      if (member.hasOwnProperty(key) && Array.isArray(member[key]) && member[key].length > 0) {
+          if (member[key][0].hasOwnProperty('url') && member[key][0].width === 25) {
+              return member[key][0].url;
+          }
+      }
+  }
+  return null; // Return null if no URL found
+}
+
 function processDocumentMembers(authors, root) {
   console.log("Members loaded");
   const allMembers = quip.apps.getDocumentMembers();
   const authorImages = allMembers
-    .filter(member => authors.includes(member.getName()))
-    .map(member => ({ url: member.aD[0].url, name: member.getName() }));
+      .filter(member => authors.includes(member.getName()))
+      .map(member => {
+          const url = findUrlInMember(member);
+          return url ? { url, name: member.getName() } : null;
+      })
+      .filter(member => member !== null); // Filter out null entries
 
   quip.apps.getRootRecord().set("authorImages", authorImages);
+  
+  // Dispatch the custom event
+  const event = new CustomEvent('authorImagesLoaded');
+  document.dispatchEvent(event);
 }

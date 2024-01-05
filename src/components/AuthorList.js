@@ -1,20 +1,65 @@
 import { createElement } from "../utils/utils.js";
 
+document.addEventListener('authorImagesLoaded', () => {
+  // Call the function to update the authors list UI
+  console.log('authorImagesLoaded');
+  reRenderAuthorsList();
+});
+
+quip.apps.addEventListener(quip.apps.EventType.THREAD_MEMBERSHIP_CHANGED, handleThreadMembershipChange);
+
+function handleThreadMembershipChange() {
+    // Call your function to re-render the authors list here
+    reRenderAuthorsList();
+}
+
+function reRenderAuthorsList() {
+  // Assuming you have a way to access the container for the authors list
+  const authorsListContainer = document.getElementById("authorsSpan");
+
+  // Clear existing content
+  while (authorsListContainer.firstChild) {
+    authorsListContainer.removeChild(authorsListContainer.firstChild);
+  }
+
+  // Re-create the authors list with updated data
+  const updatedAuthors = quip.apps.getRootRecord().get("authors");
+  const updatedAuthorsSpan = createAuthorsSpan(updatedAuthors);
+  authorsListContainer.appendChild(updatedAuthorsSpan);
+}
+
 export function createAuthorsSpan(authors) {
   const authorsSpan = createElement("span", { id: "authorsSpan", className: "authors-span" });
 
   authors.forEach((author, index) => {
     const authorImage = quip.apps.getRootRecord().get("authorImages")?.find(img => img.name === author);
     const imageUrl = authorImage ? authorImage.url : null;
-    const authorComponent = createAuthorComponent(author, imageUrl);
-    authorsSpan.appendChild(authorComponent);
 
-    if (index < authors.length - 2) authorsSpan.appendChild(document.createTextNode(", "));
-    else if (index === authors.length - 2) authorsSpan.appendChild(document.createTextNode(authors.length > 2 ? ", and " : " and "));
+    if (imageUrl === null) {
+      const warningEmoji = document.createElement("span");
+      warningEmoji.textContent = `⚠ ${author}`;
+      warningEmoji.classList.add('warning-emoji');
+      warningEmoji.style.fontStyle = 'italic';
+      warningEmoji.style.color = 'gray';
+      authorsSpan.appendChild(warningEmoji);
+    } else {
+      const authorComponent = createAuthorComponent(author, imageUrl);
+      authorsSpan.appendChild(authorComponent);
+    }
+
+    // Add commas or 'and' appropriately, including the Oxford comma
+    if (index < authors.length - 1) {
+      if (index === authors.length - 2) {
+        authorsSpan.appendChild(document.createTextNode(authors.length > 2 ? ", and " : " and "));
+      } else {
+        authorsSpan.appendChild(document.createTextNode(", "));
+      }
+    }
   });
 
   return authorsSpan;
-}
+};
+
 
 function createAuthorComponent(author, imageUrl) {
   const authorComponent = document.createElement("span");
@@ -73,3 +118,4 @@ export function toggleAuthorsEditMode(authorsSpan, authorsInput) {
   authorsSpan.style.display = "none";
   authorsInput.focus();
 }
+
