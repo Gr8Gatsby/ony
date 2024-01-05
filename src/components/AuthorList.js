@@ -6,13 +6,6 @@ document.addEventListener('authorImagesLoaded', () => {
   reRenderAuthorsList();
 });
 
-quip.apps.addEventListener(quip.apps.EventType.THREAD_MEMBERSHIP_CHANGED, handleThreadMembershipChange);
-
-function handleThreadMembershipChange() {
-    // Call your function to re-render the authors list here
-    reRenderAuthorsList();
-}
-
 function reRenderAuthorsList() {
   // Assuming you have a way to access the container for the authors list
   const authorsListContainer = document.getElementById("authorsSpan");
