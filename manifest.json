@@ -4,7 +4,7 @@
     "name": "Why",
     "description": "Reduce document rot by adding in Who, When, Why a document was created.",
     "version_name": "1.0.0",
-    "version_number": 5,
+    "version_number": 6,
     "sizing_mode": "fill_container",
     "initial_height": 100,
     "initial_width": -1,
