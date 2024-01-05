@@ -1,6 +1,6 @@
 {
     "name": "Why",
-    "version": "0.10.0",
+    "version": "1.0.0",
     "description": "Reduce document rot by adding in Who, When, Why a document was created.",
     "license": "MIT",
     "author": "Kevin Hill",
