@@ -1,4 +1,4 @@
-import { createElement } from "../utils/utils.js"; // Replace with the actual path
+import { createElement, getHumanFriendlyDuration } from "../utils/utils.js"; // Replace with the actual path
 
 export function createDateStampElement() {
   // Create the dateStampElement container
@@ -6,13 +6,21 @@ export function createDateStampElement() {
 
   // Get the stored date from the root record or use the current date
   const storedDate = quip.apps.getRootRecord().get("date");
+  console.log(`storedDate: ${storedDate}`)
   const formattedDate = formatDate(storedDate); // Format the stored date
 
   // Create the span element to display the date
   const dateSpan = createElement("span", {
-    textContent: ` wrote this document in ${formattedDate}, `,
     className: "date-info",
   });
+
+  let humanFriendlyDatespan = '';
+  if (isValidDate(storedDate)) {
+    humanFriendlyDatespan = getHumanFriendlyDuration(storedDate);
+    dateSpan.textContent = ` wrote this document in ${formattedDate} (${humanFriendlyDatespan}), `;
+  } else {
+    dateSpan.textContent = ` wrote this document in ${formattedDate}, `;
+  }
 
   // Create the input element for editing the date
   const dateInput = createElement("input", {
@@ -57,6 +65,7 @@ function formatDate(dateString) {
 
 export function getCurrentMonthYear() {
   const now = new Date();
+  quip.apps.getRootRecord().set("date", now);
   const monthNames = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -88,3 +97,7 @@ function handleDateInputBlur(dateInput, dateStampElement) {
   dateInput.style.display = "none";
 }
 
+function isValidDate(dateString) {
+  // This function checks if the dateString is valid
+  return !isNaN(new Date(dateString).getTime());
+}

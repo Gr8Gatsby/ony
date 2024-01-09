@@ -18,7 +18,14 @@ quip.apps.initialize({
   initializationCallback: (root, params) => {
     const storedAuthors = quip.apps.getRootRecord().get("authors") || [];
     const authors = storedAuthors.length > 0 ? storedAuthors : [quip.apps.getViewingUser().getName()];
-
+    // Check if a date is already set, if not, set the default date to January 2024
+    let storedDate = quip.apps.getRootRecord().get("date");
+    if (!storedDate) {
+      // Format is "YYYY-MM", adjust if your application needs a different format
+      const defaultDate = new Date(); // Set to January 2024
+      quip.apps.getRootRecord().set("date", defaultDate);
+      storedDate = defaultDate;
+    }
     const instructionPanel = createInstructionPanel();
     const showInstructionPanel = () => instructionPanel.style.display = "block";
     const hideInstructionPanel = () => instructionPanel.style.display = "none";
@@ -99,3 +106,5 @@ function processDocumentMembers(authors, root) {
   const event = new CustomEvent('authorImagesLoaded');
   document.dispatchEvent(event);
 }
+
+

@@ -10,15 +10,23 @@ function reRenderAuthorsList() {
   // Assuming you have a way to access the container for the authors list
   const authorsListContainer = document.getElementById("authorsSpan");
 
-  // Clear existing content
-  while (authorsListContainer.firstChild) {
-    authorsListContainer.removeChild(authorsListContainer.firstChild);
+  // Check if there are authors to update
+  if (updatedAuthors && updatedAuthors.length > 0) {
+    // Clear existing content only if there are new authors to display
+    while (authorsListContainer.firstChild) {
+      authorsListContainer.removeChild(authorsListContainer.firstChild);
+    }
+
+    // Re-create the authors list with updated data
+    const updatedAuthorsSpan = createAuthorsSpan(updatedAuthors);
+    authorsListContainer.appendChild(updatedAuthorsSpan);
+  } else {
+    // Re-create the authors list with updated data
+    const updatedAuthors = quip.apps.getRootRecord().get("authors");
+    const updatedAuthorsSpan = createAuthorsSpan(updatedAuthors);
+    authorsListContainer.appendChild(updatedAuthorsSpan);
   }
 
-  // Re-create the authors list with updated data
-  const updatedAuthors = quip.apps.getRootRecord().get("authors");
-  const updatedAuthorsSpan = createAuthorsSpan(updatedAuthors);
-  authorsListContainer.appendChild(updatedAuthorsSpan);
 }
 
 export function createAuthorsSpan(authors) {
@@ -30,10 +38,11 @@ export function createAuthorsSpan(authors) {
 
     if (imageUrl === null) {
       const warningEmoji = document.createElement("span");
-      warningEmoji.textContent = `⚠ ${author}`;
+      // warningEmoji.textContent = `⚠ ${author}`;
+      warningEmoji.textContent = `${author}`;
       warningEmoji.classList.add('warning-emoji');
-      warningEmoji.style.fontStyle = 'italic';
-      warningEmoji.style.color = 'gray';
+      // warningEmoji.style.fontStyle = 'italic';
+      // warningEmoji.style.color = 'gray';
       authorsSpan.appendChild(warningEmoji);
     } else {
       const authorComponent = createAuthorComponent(author, imageUrl);
@@ -65,7 +74,7 @@ function createAuthorComponent(author, imageUrl) {
     img.className = "author-image";
     authorComponent.appendChild(img);
   }
-  
+
   const nameSpan = document.createElement("span");
   nameSpan.textContent = author;
   authorComponent.appendChild(nameSpan);
