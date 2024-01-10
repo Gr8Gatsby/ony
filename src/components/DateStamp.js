@@ -50,18 +50,32 @@ export function createDateStampElement() {
 }
 
 function formatDate(dateString) {
-  if (!dateString) {
-    return getCurrentMonthYear(); // Return the current date if not set
+  let date = new Date(dateString);
+
+  // Check if the date is invalid. If so, try parsing it.
+  if (isNaN(date)) {
+    // Attempt to parse dateString as a valid date
+    date = new Date(Date.parse(dateString));
+    if (isNaN(date)) {
+      // If still invalid, use the current date
+      date = new Date();
+    }
   }
 
-  const [year, month] = dateString.split("-");
+  const year = date.getFullYear();
+  const monthIndex = date.getMonth();
+
   const monthNames = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-  const formattedDate = `${monthNames[parseInt(month) - 1]} ${year}`;
+
+  const formattedDate = `${monthNames[monthIndex]} ${year}`;
   return formattedDate;
 }
+
+
+
 
 export function getCurrentMonthYear() {
   const now = new Date();

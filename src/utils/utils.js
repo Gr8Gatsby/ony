@@ -16,6 +16,12 @@ export function createElement(type, props, children = []) {
 
 export function getHumanFriendlyDuration(date) {
   console.log(date);
+
+  // Utility function to format time with correct pluralization
+  const formatTime = (value, unit) => {
+    return `${value} ${unit}${value > 1 ? 's' : ''} ago`;
+  };
+
   // Convert the original timestamp to milliseconds since the Unix epoch
   const originalTimestampMs = parseInt(new Date(date).getTime());
 
@@ -25,16 +31,15 @@ export function getHumanFriendlyDuration(date) {
   // Calculate the difference in milliseconds between the timestamps
   const millisecondsDiff = currentTimestampMs - originalTimestampMs;
 
-  // Format the human-friendly time distance
-  var humanFriendlyDuration = "";
+  // Calculate weeks difference
   const weeksDiff = Math.floor(millisecondsDiff / 604800000);
-  if (weeksDiff < 3) {
-    humanFriendlyDuration = `${weeksDiff} weeks ago`;
-  } else if (weeksDiff < 52) {
-    humanFriendlyDuration = `${Math.floor(weeksDiff / 4)} months ago`;
-  } else {
-    humanFriendlyDuration = `${Math.floor(weeksDiff / 52)} years ago`;
-  }
 
-  return humanFriendlyDuration;
+  // Determine and format the human-friendly time distance
+  if (weeksDiff < 4) {
+    return formatTime(weeksDiff, 'week');
+  } else if (weeksDiff < 52) {
+    return formatTime(Math.floor(weeksDiff / 4), 'month');
+  } else {
+    return formatTime(Math.floor(weeksDiff / 52), 'year');
+  }
 }
