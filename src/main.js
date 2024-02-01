@@ -17,7 +17,10 @@ import { createInstructionPanel } from "./components/Instructions.js";
 quip.apps.initialize({
   initializationCallback: (root, params) => {
     const storedAuthors = quip.apps.getRootRecord().get("authors") || [];
+    console.log(`storedAuthors: ${storedAuthors}`);
     const authors = storedAuthors.length > 0 ? storedAuthors : [quip.apps.getViewingUser().getName()];
+    quip.apps.getRootRecord().set("authors", authors);
+    console.log(`storedAuthors: ${authors}`);
     // Check if a date is already set, if not, set the default date to January 2024
     let storedDate = quip.apps.getRootRecord().get("date");
     if (!storedDate) {
