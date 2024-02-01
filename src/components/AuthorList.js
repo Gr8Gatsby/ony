@@ -6,27 +6,19 @@ document.addEventListener('authorImagesLoaded', () => {
   reRenderAuthorsList();
 });
 
-function reRenderAuthorsList() {
-  // Assuming you have a way to access the container for the authors list
+function reRenderAuthorsList(updatedAuthors) { // Accept updatedAuthors as a parameter
   const authorsListContainer = document.getElementById("authorsSpan");
-
-  // Check if there are authors to update
-  if (updatedAuthors && updatedAuthors.length > 0) {
-    // Clear existing content only if there are new authors to display
+  
+  if (authorsListContainer && updatedAuthors && updatedAuthors.length > 0) {
     while (authorsListContainer.firstChild) {
       authorsListContainer.removeChild(authorsListContainer.firstChild);
     }
 
-    // Re-create the authors list with updated data
     const updatedAuthorsSpan = createAuthorsSpan(updatedAuthors);
     authorsListContainer.appendChild(updatedAuthorsSpan);
   } else {
-    // Re-create the authors list with updated data
-    const updatedAuthors = quip.apps.getRootRecord().get("authors");
-    const updatedAuthorsSpan = createAuthorsSpan(updatedAuthors);
-    authorsListContainer.appendChild(updatedAuthorsSpan);
+    console.log("No updated authors to display.");
   }
-
 }
 
 export function createAuthorsSpan(authors) {
