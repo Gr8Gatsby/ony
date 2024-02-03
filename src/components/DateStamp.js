@@ -17,7 +17,11 @@ export function createDateStampElement() {
   let humanFriendlyDatespan = '';
   if (isValidDate(storedDate)) {
     humanFriendlyDatespan = getHumanFriendlyDuration(storedDate);
-    dateSpan.textContent = ` wrote this document in ${formattedDate} (${humanFriendlyDatespan}), `;
+    if(humanFriendlyDatespan !== ''){
+      dateSpan.textContent = ` wrote this document in ${formattedDate} ${humanFriendlyDatespan}, `;
+    } else {
+      dateSpan.textContent = ` wrote this document in ${formattedDate}, `;
+    }
   } else {
     dateSpan.textContent = ` wrote this document in ${formattedDate}, `;
   }

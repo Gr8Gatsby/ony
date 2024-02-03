@@ -19,7 +19,7 @@ export function getHumanFriendlyDuration(date) {
 
   // Utility function to format time with correct pluralization
   const formatTime = (value, unit) => {
-    return `${value} ${unit}${value > 1 ? 's' : ''} ago`;
+    return `(${value} ${unit}${value > 1 ? 's' : ''} ago)`;
   };
 
   // Convert the original timestamp to milliseconds since the Unix epoch
@@ -35,11 +35,14 @@ export function getHumanFriendlyDuration(date) {
   const weeksDiff = Math.floor(millisecondsDiff / 604800000);
 
   // Determine and format the human-friendly time distance
-  if (weeksDiff < 4) {
+  if(weeksDiff < 1) {
+    return '';
+  }
+  else if (weeksDiff < 4) {
     return formatTime(weeksDiff, 'week');
   } else if (weeksDiff < 52) {
     return formatTime(Math.floor(weeksDiff / 4), 'month');
-  } else {
+  } else if (weeksDiff >= 52){
     return formatTime(Math.floor(weeksDiff / 52), 'year');
   }
 }
